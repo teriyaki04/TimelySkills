@@ -1,0 +1,55 @@
+﻿@model IReadOnlyList<TimelySkills.Core.DTOs.OrderDTO>
+
+@{
+    ViewBag.Title = "Order List";
+    Layout = "_Layout";
+}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<table>
+    <thead>
+    <tr>
+        <th>Номер заказа</th>
+        <th>ФИО отправителя</th>
+        <th>Город отправителя</th>
+        <th>Адрес отправителя</th>
+        <th>ФИО получателя</th>
+        <th>Город получателя</th>
+        <th>Адрес получателя</th>
+        <th>Вес</th>
+        <th>Дата отправки</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.OrderId</td>
+            <td>@($"{order.Sender.SenderFirstName} {order.Sender.SenderLastName} {order.Sender.SenderPatronymic}")</td>
+            <td>@order.Sender.SenderCity</td>
+            <td>@order.Sender.SenderAddress</td>
+            <td>@($"{order.Receiver.ReceiverFirstName} {order.Receiver.ReceiverLastName} {order.Receiver.ReceiverPatronymic}")</td>
+            <td>@order.Receiver.ReceiverCity</td>
+            <td>@order.Receiver.ReceiverAddress</td>
+            <td>@order.Weight</td>
+            <td>@order.DateOfDispatch.ToString("yyyy-MM-dd")</td>
+        </tr>
+    }
+    </tbody>
+</table>
